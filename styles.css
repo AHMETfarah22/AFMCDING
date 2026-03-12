@@ -1826,30 +1826,36 @@ section {
 /* Responsive Design */
 @media (max-width: 768px) {
     .nav-links {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--color-surface);
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(20px);
         flex-direction: column;
-        padding: 1rem;
-        gap: 0;
-        transform: translateY(-100%);
+        justify-content: center;
+        padding: 4rem 2rem;
+        gap: 1.5rem;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         opacity: 0;
         pointer-events: none;
-        transition: var(--transition);
-        border-bottom: 1px solid var(--color-border);
+        border-left: 1px solid var(--color-border);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
     }
 
     .nav-links.active {
-        transform: translateY(0);
+        right: 0;
         opacity: 1;
         pointer-events: all;
     }
 
     .nav-link {
         padding: 1rem;
-        border-bottom: 1px solid var(--color-border);
+        width: 100%;
+        justify-content: center;
+        font-size: 1.25rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .mobile-menu-btn {
@@ -1876,16 +1882,36 @@ section {
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.25rem;
+        margin-top: 1rem;
     }
 
     .hero-subtitle {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-buttons {
+        justify-content: center;
     }
 
     .image-wrapper {
-        width: 300px;
-        height: 300px;
+        width: 260px;
+        height: 260px;
+        margin: 0 auto;
+    }
+
+    .floating-profile {
+        width: 220px;
+        height: 220px;
+    }
+
+    .code-window {
+        display: none; /* Hide complex code window on mobile to reduce clutter */
     }
 
     .about-content {
@@ -1930,10 +1956,16 @@ section {
 
     .projects-grid {
         grid-template-columns: 1fr;
+        padding: 0 0.5rem;
     }
 
     .services-grid {
         grid-template-columns: 1fr;
+        padding: 0 0.5rem;
+    }
+
+    .section-title {
+        font-size: 2.25rem;
     }
 }
 
