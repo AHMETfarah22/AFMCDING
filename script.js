@@ -362,19 +362,18 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.disabled = true;
 
         try {
-            const res = await fetch('contact.php', {
+            const res = await fetch('https://formspree.io/f/mleypwnq', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             });
 
-            const data = await res.json();
-            
-            if (data.success) {
+            if (res.ok) {
                 showNotification('Thank you for your message! It has been sent successfully.', 'success');
                 contactForm.reset();
             } else {
-                showNotification(data.error || 'Failed to send message.', 'error');
+                const data = await res.json();
+                showNotification(data.errors?.[0]?.message || 'Failed to send message.', 'error');
             }
         } catch (err) {
             console.error(err);
