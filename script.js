@@ -350,6 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         const formData = {
+            access_key: "d3b06feb-bd1e-4713-9292-80433af75420",
             name: name,
             email: email,
             subject: subject,
@@ -362,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.disabled = true;
 
         try {
-            const res = await fetch('https://formspree.io/f/mleypwnq', {
+            const res = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
