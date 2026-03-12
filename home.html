@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFM-CODING | Full Stack Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+        </div>
+    </div>
+
+    <!-- Cursor Effect -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <span class="logo-text">AFM</span>
+                <span class="logo-subtext">CODING</span>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about" class="nav-link"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="#services" class="nav-link"><i class="fas fa-code"></i> Services</a></li>
+                <li><a href="#skills" class="nav-link"><i class="fas fa-cogs"></i> Skills</a></li>
+                <li><a href="#projects" class="nav-link"><i class="fas fa-briefcase"></i> Projects</a></li>
+                <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+
+            <div class="theme-toggle">
+                <button id="themeToggle" class="theme-btn">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg-particles" id="particles-js"></div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>🚀 Welcome to My Digital World</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    Hi, I'm <span class="gradient-text">Ahmed Farah Mohamed</span>
+                </h1>
+                
+                <div class="typewriter">
+                    <p class="hero-subtitle">I'm a <span class="typed-text"></span><span class="cursor-blinking">|</span></p>
+                </div>
+                
+                <p class="hero-description">
+                    Crafting exceptional digital experiences through innovative web development, 
+                    creative design, and data-driven insights. Let's build something amazing together.
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        <span>Get In Touch</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#projects" class="btn btn-secondary">
+                        <span>View My Work</span>
+                    </a>
+                    <a href="cv.pdf" class="btn btn-ghost" download>
+                    <i class="fas fa-download"></i>
+                      <span>Download CV</span>
+                       </a>
+                </div>
+
+                <div class="hero-social">
+                    <a href="#" class="social-link" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Dribbble">
+                        <i class="fab fa-dribbble"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="image-wrapper">
+                    <div class="image-glow"></div>
+                    <div class="floating-shapes">
+                        <div class="shape shape-1"></div>
+                        <div class="shape shape-2"></div>
+                        <div class="shape shape-3"></div>
+                    </div>
+                    <div class="code-window">
+                        <div class="window-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="window-body">
+<pre><code class="language-js"><span class="keyword">const</span> <span class="variable">developer</span> = {
+  <span class="property">name</span>: <span class="string">'Ahmed Farah Mohamed'</span>,
+  <span class="property">role</span>: <span class="string">'Full-Stack Developer'</span>,
+  <span class="property">passion</span>: <span class="string">'Crafting Digital Experiences'</span>,
+  <span class="property">skills</span>: [<span class="string">'React'</span>, <span class="string">'Node.js'</span>, <span class="string">'Python'</span>]
+};
+
+<span class="variable">developer</span>.<span class="method">build</span>(<span class="string">'awesome_things'</span>);</code></pre>
+                        </div>
+                    </div>
+                    <img src="image/profil.jpeg" alt="Ahmed Farah Mohamed" id="profileImage" class="floating-profile">
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Get to know me better</p>
+                <div class="section-decoration">
+                    <div class="decoration-line"></div>
+                    <div class="decoration-dot"></div>
+                    <div class="decoration-line"></div>
+                </div>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-main">
+                        <p class="about-paragraph">
+                            I'm <strong>Ahmed Farah Mohamed</strong>, the founder of <strong class="gradient-text">AFM-CODING</strong>. 
+                            With <strong>5+ years</strong> of experience in web development and design, I specialize in creating 
+                            robust, scalable applications that solve real-world problems.
+                        </p>
+                        
+                        <p class="about-paragraph">
+                            My expertise spans across the entire development stack - from crafting beautiful, responsive 
+                            frontends to building powerful backend systems. I also bring creative flair through logo design 
+                            and leverage data analysis to drive informed decision-making.
+                        </p>
+                    </div>
+
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Fast & Efficient</h4>
+                                <p>Optimized solutions for maximum performance</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Responsive Design</h4>
+                                <p>Perfect experience on all devices</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Secure & Reliable</h4>
+                                <p>Enterprise-grade security standards</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" data-count="50">10</div>
+                            <div class="stat-label">Projects Completed</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" data-count="30">3</div>
+                            <div class="stat-label">Happy Clients</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" data-count="5">2</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" data-count="15">1</div>
+                            <div class="stat-label">Awards Won</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">My Services</h2>
+                <p class="section-subtitle">What I can do for you</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="service-title">Frontend Development</h3>
+                    <p class="service-description">
+                        Creating stunning, responsive user interfaces with modern frameworks and technologies. 
+                        Expertise in React, Vue, HTML5, CSS3, and JavaScript.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Responsive Design</li>
+                        <li><i class="fas fa-check"></i> Modern Frameworks</li>
+                        <li><i class="fas fa-check"></i> Performance Optimization</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="service-title">Backend Development</h3>
+                    <p class="service-description">
+                        Building robust server-side applications and APIs. Proficient in Node.js, databases, 
+                        and cloud infrastructure for scalable solutions.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> RESTful APIs</li>
+                        <li><i class="fas fa-check"></i> Database Design</li>
+                        <li><i class="fas fa-check"></i> Cloud Deployment</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="service-title">UI/UX Design</h3>
+                    <p class="service-description">
+                        Crafting intuitive and beautiful user interfaces that provide exceptional user experiences 
+                        and drive engagement.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> User Research</li>
+                        <li><i class="fas fa-check"></i> Wireframing</li>
+                        <li><i class="fas fa-check"></i> Prototyping</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="service-title">Data Analysis</h3>
+                    <p class="service-description">
+                        Transforming raw data into actionable insights. Expert analysis and visualization 
+                        to drive informed business decisions.
+                    </p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Data Visualization</li>
+                        <li><i class="fas fa-check"></i> Statistical Analysis</li>
+                        <li><i class="fas fa-check"></i> Business Insights</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    
+
+    <!-- Projects Section -->
+   <section id="projects" class="projects">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">My Projects</h2>
+            <p class="section-subtitle">Some of my recent work</p>
+        </div>
+        
+        <div class="project-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">Web Development</button>
+            <button class="filter-btn" data-filter="design">Design</button>
+            <button class="filter-btn" data-filter="mobile">Mobile</button>
+        </div><section id="skills" class="skills">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">My Skills</h2>
+            <p class="section-subtitle">Technologies I work with</p>
+        </div>
+        
+        <div class="skills-container">
+            <div class="skills-categories">
+                <div class="skill-category active" data-category="frontend">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h4>Frontend</h4>
+                </div>
+                
+                <div class="skill-category" data-category="backend">
+                    <div class="category-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h4>Backend</h4>
+                </div>
+                
+                <div class="skill-category" data-category="tools">
+                    <div class="category-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h4>Tools</h4>
+                </div>
+                
+                <div class="skill-category" data-category="design">
+                    <div class="category-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h4>Design</h4>
+                </div>
+            </div>
+            
+            <div class="skills-content">
+                <!-- Frontend Skills -->
+                <div class="skills-grid active" id="frontend">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">HTML5</span>
+                            <span class="skill-percentage">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">CSS3/SCSS</span>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">JavaScript</span>
+                            <span class="skill-percentage">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="88"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">React</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Vue.js</span>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">TypeScript</span>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Tailwind CSS</span>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Bootstrap</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Backend Skills -->
+                <div class="skills-grid" id="backend">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Node.js</span>
+                            <span class="skill-percentage">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="88"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Express.js</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Python</span>
+                            <span class="skill-percentage">82%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="82"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">MongoDB</span>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">PostgreSQL</span>
+                            <span class="skill-percentage">78%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="78"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">MySQL</span>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">RESTful APIs</span>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">GraphQL</span>
+                            <span class="skill-percentage">70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="70"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools Skills -->
+                <div class="skills-grid" id="tools">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Git & GitHub</span>
+                            <span class="skill-percentage">92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="92"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Docker</span>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Webpack</span>
+                            <span class="skill-percentage">78%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="78"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">VS Code</span>
+                            <span class="skill-percentage">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Postman</span>
+                            <span class="skill-percentage">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="88"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">AWS</span>
+                            <span class="skill-percentage">70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="70"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Firebase</span>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Jest</span>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design Skills -->
+                <div class="skills-grid" id="design">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Figma</span>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Adobe Illustrator</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Adobe Photoshop</span>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">UI/UX Design</span>
+                            <span class="skill-percentage">88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="88"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Wireframing</span>
+                            <span class="skill-percentage">92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="92"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Prototyping</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">User Research</span>
+                            <span class="skill-percentage">78%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="78"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span class="skill-name">Design Systems</span>
+                            <span class="skill-percentage">82%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="82"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Skills Summary -->
+        <div class="skills-summary">
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h4>Frontend Mastery</h4>
+                <p>Modern frameworks, responsive design, and interactive user experiences</p>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h4>Backend Expertise</h4>
+                <p>Server-side development, database management, and API design</p>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h4>Design Skills</h4>
+                <p>UI/UX design, prototyping, and creating visually appealing interfaces</p>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h4>Tools & DevOps</h4>
+                <p>Version control, deployment, and development workflow optimization</p>
+            </div>
+        </div>
+    </div>
+</section>
+        
+        <div class="projects-grid">
+            <!-- Web Development Projects -->
+            <div class="project-card" data-category="web">
+                <div class="project-image">
+                    <img src="image/Digital-Transformation.jpg" alt="E-Commerce Platform">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="https://github.com/AHMETfarah22" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">E-Commerce Platform</h3>
+                    <p class="project-description">Full-stack e-commerce solution with modern technologies and secure payment integration</p>
+                    <div class="project-tags">
+                        <span class="project-tag">React</span>
+                        <span class="project-tag">Node.js</span>
+                        <span class="project-tag">MongoDB</span>
+                        <span class="project-tag">Stripe</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="web">
+                <div class="project-image">
+                    <img src="image/task-management-dashboard.png" alt="Task Management Dashboard">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="https://github.com/AHMETfarah22" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Task Management Dashboard</h3>
+                    <p class="project-description">Real-time collaborative task management system with drag & drop functionality</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Vue.js</span>
+                        <span class="project-tag">Firebase</span>
+                        <span class="project-tag">SCSS</span>
+                        <span class="project-tag">WebSocket</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="web">
+                <div class="project-image">
+                    <img src="image/travel.jpg" alt="Travel Booking Platform">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="https://github.com/AHMETfarah22" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Travel Booking Platform</h3>
+                    <p class="project-description">Comprehensive travel booking system with hotel, flight, and car rental services</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Next.js</span>
+                        <span class="project-tag">PostgreSQL</span>
+                        <span class="project-tag">Tailwind</span>
+                        <span class="project-tag">Mapbox</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design Projects -->
+            <div class="project-card" data-category="design">
+                <div class="project-image">
+                    <img src="image/bread.jpg" alt="Brand Identity Design">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="https://github.com/AHMETfarah22" class="project-link">
+                                <i class="fab fa-behance"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Tech Startup Brand Identity</h3>
+                    <p class="project-description">Complete brand identity package including logo, typography, and brand guidelines</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Logo Design</span>
+                        <span class="project-tag">Branding</span>
+                        <span class="project-tag">Adobe Illustrator</span>
+                        <span class="project-tag">Style Guide</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="design">
+                <div class="project-image">
+                    <img src="image/desing.jpg" alt="Mobile App UI Design">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="https://github.com/AHMETfarah22" class="project-link">
+                                <i class="fab fa-dribbble"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Fitness App UI/UX Design</h3>
+                    <p class="project-description">Modern fitness application design with intuitive user experience and smooth animations</p>
+                    <div class="project-tags">
+                        <span class="project-tag">UI/UX Design</span>
+                        <span class="project-tag">Figma</span>
+                        <span class="project-tag">Prototyping</span>
+                        <span class="project-tag">User Research</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="design">
+                <div class="project-image">
+                    <img src="image/website.png" alt="Website Redesign">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="https://github.com/AHMETfarah22" class="project-link">
+                                <i class="fab fa-behance"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Corporate Website Redesign</h3>
+                    <p class="project-description">Complete redesign of corporate website focusing on user experience and conversion optimization</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Web Design</span>
+                        <span class="project-tag">Adobe XD</span>
+                        <span class="project-tag">Wireframing</span>
+                        <span class="project-tag">A/B Testing</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Projects -->
+            <div class="project-card" data-category="mobile">
+                <div class="project-image">
+                    <img src="image/food app.webp" alt="Food Delivery App">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="https://github.com/AHMETfarah22" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Food Delivery Mobile App</h3>
+                    <p class="project-description">Cross-platform food delivery application with real-time tracking and payment integration</p>
+                    <div class="project-tags">
+                        <span class="project-tag">React Native</span>
+                        <span class="project-tag">Firebase</span>
+                        <span class="project-tag">Redux</span>
+                        <span class="project-tag">Google Maps API</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="mobile">
+                <div class="project-image">
+                    <img src="image/sosioal.jpg" alt="Social Media App">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="https://github.com/AHMETfarah22" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Social Media Platform</h3>
+                    <p class="project-description">Feature-rich social media application with chat, stories, and content sharing</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Flutter</span>
+                        <span class="project-tag">Dart</span>
+                        <span class="project-tag">Node.js</span>
+                        <span class="project-tag">WebRTC</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="mobile">
+                <div class="project-image">
+                    <img src="image/finans.jpg" alt="Finance Tracking App">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="https://github.com/AHMETfarah22" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Personal Finance Tracker</h3>
+                    <p class="project-description">Mobile application for tracking expenses, budgets, and financial goals with analytics</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Swift</span>
+                        <span class="project-tag">iOS</span>
+                        <span class="project-tag">Core Data</span>
+                        <span class="project-tag">Charts</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mixed Projects -->
+            <div class="project-card" data-category="web design">
+                <div class="project-image">
+                    <img src="image/model-website.png" alt="Portfolio Website">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="https://github.com/AHMETfarah22" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Creative Portfolio Website</h3>
+                    <p class="project-description">Modern portfolio website with custom animations and responsive design</p>
+                    <div class="project-tags">
+                        <span class="project-tag">HTML/CSS</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">GSAP</span>
+                        <span class="project-tag">UI Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" data-category="mobile design">
+                <div class="project-image">
+                    <img src="image/mobile.jpg" alt="E-learning App">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">E-Learning Mobile Platform</h3>
+                    <p class="project-description">Educational app with course management, video streaming, and progress tracking</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Kotlin</span>
+                        <span class="project-tag">Android</span>
+                        <span class="project-tag">UI/UX</span>
+                        <span class="project-tag">Video Streaming</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="projects-load-more">
+            <button class="btn btn-outline" id="loadMoreProjects">
+                <span>Load More Projects</span>
+                <i class="fas fa-arrow-down"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Let's work together</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>dedeyare4455@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>+252 90 755 4481</p>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>+90 541 626 4074</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p>Somalia</p>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Location</h4>
+                            <p>Turkiye</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-social">
+                        <a href="https://github.com/AHMETfarah22" class="social-link"  target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/feed/" class="social-link"  target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                       <a href="https://www.instagram.com/" class="social-link" target="_blank" rel="noopener noreferrer">
+                                 <i class="fab fa-instagram"></i>
+                        </a>
+
+                         <a href="https://www.facebook.com/" class="social-link" target="_blank" rel="noopener noreferrer">
+                             <i class="fab fa-facebook"></i>
+                          </a>
+
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm">
+    <div class="form-row">
+        <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+    </div>
+    
+    <button type="submit" class="btn btn-primary btn-full">
+        <span>Send Message</span>
+        <i class="fas fa-paper-plane"></i>
+    </button>
+</form>
+
+<p id="status"></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-text">AFM</span>
+                        <span class="logo-subtext">CODING</span>
+                    </div>
+                    <p>Building digital excellence with passion and innovation</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#services">Services</a>
+                        <a href="#projects">Projects</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <a href="#">Web Development</a>
+                        <a href="#">UI/UX Design</a>
+                        <a href="#">Data Analysis</a>
+                        <a href="#">Consulting</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Connect</h4>
+                        <a href="https://github.com/AHMETfarah22"  target="_blank">GitHub</a>
+                        <a href="https://www.linkedin.com/feed/?trk=hb_signin"  target="_blank">LinkedIn</a>
+                        <a href="https://www.instagram.com/accounts/login/?hl=en"  target="_blank">instigram</a>
+                        <a href="https://www.facebook.com/"  target="_blank">Facbook</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 <span class="gradient-text">AFM-CODING</span>. All rights reserved. | Crafted with <i class="fas fa-heart"></i> by Ahmed Farah Mohamed</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
