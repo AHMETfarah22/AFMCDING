@@ -1,659 +1,364 @@
-// Enhanced JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    // Preloader
-    const preloader = document.querySelector('.preloader');
-    setTimeout(() => {
-        preloader.classList.add('loaded');
-        setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 500);
-    }, 1500);
+/* ================================================
+   AFM-CODING PREMIUM PORTFOLIO — SCRIPT v3.0
+   ================================================ */
+'use strict';
 
-    // Cursor Effects
-    const cursor = document.querySelector('.cursor');
-    const cursorFollower = document.querySelector('.cursor-follower');
-    
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ==========================================
+  // 1. PRELOADER
+  // ==========================================
+  const preloader = document.getElementById('preloader');
+  const preloaderFill = document.getElementById('preloaderFill');
+  const preloaderPct = document.getElementById('preloaderPct');
+  let pct = 0;
+
+  const pctInterval = setInterval(() => {
+    pct += Math.random() * 15;
+    if (pct > 90) pct = 90;
+    preloaderFill.style.width = pct + '%';
+    preloaderPct.textContent = Math.floor(pct) + '%';
+  }, 120);
+
+  window.addEventListener('load', () => {
+    clearInterval(pctInterval);
+    preloaderFill.style.width = '100%';
+    preloaderPct.textContent = '100%';
+    setTimeout(() => {
+      preloader.classList.add('done');
+      initAOS();
+      animateSkillBars('frontend');
+    }, 600);
+  });
+
+  // Fallback
+  setTimeout(() => {
+    if (!preloader.classList.contains('done')) {
+      clearInterval(pctInterval);
+      preloaderFill.style.width = '100%';
+      preloaderPct.textContent = '100%';
+      preloader.classList.add('done');
+      initAOS();
+      animateSkillBars('frontend');
+    }
+  }, 3500);
+
+
+  // ==========================================
+  // 2. CUSTOM CURSOR
+  // ==========================================
+  const cursorDot = document.getElementById('cursorDot');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  if (window.matchMedia('(hover: hover)').matches) {
     document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        
-        setTimeout(() => {
-            cursorFollower.style.left = e.clientX + 'px';
-            cursorFollower.style.top = e.clientY + 'px';
-        }, 100);
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
     });
 
-    // Theme Toggle
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = themeToggle.querySelector('i');
-    
-    themeToggle.addEventListener('click', () => {
-        const isDark = document.body.getAttribute('data-theme') === 'light';
-        document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
-        themeIcon.className = isDark ? 'fas fa-moon' : 'fas fa-sun';
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    const animateCursor = () => {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      cursorRing.style.transform = `translate(calc(${ringX}px - 50%), calc(${ringY}px - 50%))`;
+      requestAnimationFrame(animateCursor);
+    };
+    animateCursor();
+
+    document.querySelectorAll('a, button, .proj-card, .project-featured, .ci-card').forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
     });
+  }
 
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.body.setAttribute('data-theme', savedTheme);
-    themeIcon.className = savedTheme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
 
-    // Navbar scroll effect
-    const navbar = document.getElementById("navbar");
-    let lastScroll = 0;
+  // ==========================================
+  // 3. THEME TOGGLE
+  // ==========================================
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const savedTheme = localStorage.getItem('afm-theme') || 'dark';
+  applyTheme(savedTheme);
 
-    window.addEventListener("scroll", () => {
-        const currentScroll = window.pageYOffset;
+  themeToggle?.addEventListener('click', () => {
+    const cur = document.body.getAttribute('data-theme');
+    applyTheme(cur === 'dark' ? 'light' : 'dark');
+  });
 
-        if (currentScroll > 50) {
-            navbar.classList.add("scrolled");
-        } else {
-            navbar.classList.remove("scrolled");
-        }
-
-        lastScroll = currentScroll;
-    });
-
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-    const navLinks = document.getElementById("navLinks");
-
-    mobileMenuBtn.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-        mobileMenuBtn.classList.toggle('active');
-    });
-
-    // Close mobile menu when clicking a link
-    const navLinkItems = document.querySelectorAll(".nav-link");
-    navLinkItems.forEach((link) => {
-        link.addEventListener("click", () => {
-            navLinks.classList.remove("active");
-            mobileMenuBtn.classList.remove('active');
-        });
-    });
-
-    // Active nav link on scroll
-    const sections = document.querySelectorAll("section");
-
-    window.addEventListener("scroll", () => {
-        let current = "";
-
-        sections.forEach((section) => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-
-            if (window.pageYOffset >= sectionTop - 200) {
-                current = section.getAttribute("id");
-            }
-        });
-
-        navLinkItems.forEach((link) => {
-            link.classList.remove("active");
-            if (link.getAttribute("href").slice(1) === current) {
-                link.classList.add("active");
-            }
-        });
-    });
-
-    // Smooth scroll for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute("href"));
-
-            if (target) {
-                const offsetTop = target.offsetTop - 80;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: "smooth",
-                });
-            }
-        });
-    });
-
-    // Typewriter Effect
-    class TypeWriter {
-        constructor(txtElement, words, wait = 3000) {
-            this.txtElement = txtElement;
-            this.words = words;
-            this.txt = '';
-            this.wordIndex = 0;
-            this.wait = parseInt(wait, 10);
-            this.type();
-            this.isDeleting = false;
-        }
-
-        type() {
-            const current = this.wordIndex % this.words.length;
-            const fullTxt = this.words[current];
-
-            if (this.isDeleting) {
-                this.txt = fullTxt.substring(0, this.txt.length - 1);
-            } else {
-                this.txt = fullTxt.substring(0, this.txt.length + 1);
-            }
-
-            this.txtElement.innerHTML = `<span class="txt">${this.txt}</span>`;
-
-            let typeSpeed = 100;
-
-            if (this.isDeleting) {
-                typeSpeed /= 2;
-            }
-
-            if (!this.isDeleting && this.txt === fullTxt) {
-                typeSpeed = this.wait;
-                this.isDeleting = true;
-            } else if (this.isDeleting && this.txt === '') {
-                this.isDeleting = false;
-                this.wordIndex++;
-                typeSpeed = 500;
-            }
-
-            setTimeout(() => this.type(), typeSpeed);
-        }
+  function applyTheme(theme) {
+    document.body.setAttribute('data-theme', theme);
+    localStorage.setItem('afm-theme', theme);
+    if (themeIcon) {
+      themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
     }
+  }
 
-    // Init TypeWriter
-    const initTypeWriter = () => {
-        const txtElement = document.querySelector('.typed-text');
-        const words = JSON.parse(txtElement.getAttribute('data-words'));
-        const wait = txtElement.getAttribute('data-wait');
-        new TypeWriter(txtElement, words, wait);
-    };
 
-    // Set typewriter words
-    const typedText = document.querySelector('.typed-text');
-    if (typedText) {
-        typedText.setAttribute('data-words', JSON.stringify([
-            'Full-Stack Developer',
-            'Logo Designer', 
-            'Data Analyst',
-            'UI/UX Designer',
-            'Problem Solver'
-        ]));
-        typedText.setAttribute('data-wait', '2000');
-        initTypeWriter();
-    }
+  // ==========================================
+  // 4. MOBILE MENU
+  // ==========================================
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobLinks = document.querySelectorAll('.mob-link, .mob-cv');
 
-    // Animated Counter
-    const counters = document.querySelectorAll('.stat-number');
-    const speed = 200;
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
 
-    const startCounter = () => {
-        counters.forEach(counter => {
-            const updateCount = () => {
-                const target = +counter.getAttribute('data-count');
-                const count = +counter.innerText;
-                const inc = target / speed;
+  mobLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
 
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(updateCount, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            };
-            updateCount();
-        });
-    };
 
-    // Skills Progress Animation
-    const skillBars = document.querySelectorAll('.skill-progress');
-    
-    const animateSkills = () => {
-        skillBars.forEach(bar => {
-            const width = bar.getAttribute('data-width');
-            bar.style.width = width + '%';
-        });
-    };
+  // ==========================================
+  // 5. NAVBAR SCROLL + ACTIVE LINK
+  // ==========================================
+  const mainNav = document.getElementById('mainNav');
+  const navLinkEls = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section[id]');
 
-    // Intersection Observer for animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+  window.addEventListener('scroll', () => {
+    // Scrolled class
+    mainNav.classList.toggle('scrolled', window.scrollY > 50);
 
+    // Active nav link
+    let current = '';
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 140;
+      if (window.scrollY >= top) current = sec.getAttribute('id');
+    });
+    navLinkEls.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+    });
+  }, { passive: true });
+
+
+  // ==========================================
+  // 6. AOS — SIMPLE INTERSECTION OBSERVER
+  // ==========================================
+  function initAOS() {
+    const aosEls = document.querySelectorAll('[data-aos]');
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
-                
-                if (entry.target.classList.contains('stat-number')) {
-                    startCounter();
-                }
-                
-                if (entry.target.classList.contains('skills-content')) {
-                    animateSkills();
-                }
-            }
-        });
-    }, observerOptions);
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.dataset.aosDelay || 0;
+          setTimeout(() => entry.target.classList.add('aos-animate'), parseInt(delay));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
 
-    // Observe elements for animation
-    document.querySelectorAll('.stat-card, .service-card, .project-card, .skill-item, .about-content, .skills-content').forEach(el => {
-        observer.observe(el);
+    aosEls.forEach(el => observer.observe(el));
+  }
+
+
+  // ==========================================
+  // 7. ANIMATED COUNTERS
+  // ==========================================
+  const statNums = document.querySelectorAll('.astat-num');
+  let countersRun = false;
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !countersRun) {
+        countersRun = true;
+        statNums.forEach(el => {
+          const target = parseInt(el.dataset.count);
+          let count = 0;
+          const step = Math.max(1, Math.floor(target / 40));
+          const timer = setInterval(() => {
+            count = Math.min(count + step, target);
+            el.textContent = count;
+            if (count >= target) clearInterval(timer);
+          }, 40);
+        });
+      }
     });
+  }, { threshold: 0.3 });
 
-    // Particles.js Background
-    if (typeof particlesJS !== 'undefined') {
-        particlesJS('particles-js', {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: "#3b82f6" },
-                shape: { type: "circle" },
-                opacity: { value: 0.5, random: true },
-                size: { value: 3, random: true },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#3b82f6",
-                    opacity: 0.2,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: { enable: true, mode: "repulse" },
-                    onclick: { enable: true, mode: "push" },
-                    resize: true
-                }
-            },
-            retina_detect: true
-        });
+  const aboutStats = document.querySelector('.about-stats');
+  if (aboutStats) counterObserver.observe(aboutStats);
+
+
+  // ==========================================
+  // 8. SKILLS TABS + PROGRESS BARS
+  // ==========================================
+  const stabs = document.querySelectorAll('.stab');
+  const skillPanels = document.querySelectorAll('.skill-panel');
+
+  stabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+
+      stabs.forEach(t => t.classList.remove('active'));
+      skillPanels.forEach(p => p.classList.remove('active'));
+
+      tab.classList.add('active');
+      const panel = document.getElementById(`panel-${target}`);
+      if (panel) {
+        panel.classList.add('active');
+        animateSkillBars(target);
+      }
+    });
+  });
+
+  // Observe skills section to trigger first animation
+  const skillsWrap = document.querySelector('.skills-wrap');
+  let skillsAnimated = false;
+  const skillsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !skillsAnimated) {
+        skillsAnimated = true;
+        animateSkillBars('frontend');
+      }
+    });
+  }, { threshold: 0.2 });
+  if (skillsWrap) skillsObserver.observe(skillsWrap);
+
+  function animateSkillBars(tabName) {
+    const panel = document.getElementById(`panel-${tabName}`);
+    if (!panel) return;
+    const bars = panel.querySelectorAll('.sfill');
+    bars.forEach(bar => {
+      bar.style.width = '0%';
+      const target = getComputedStyle(bar).getPropertyValue('--w').trim();
+      setTimeout(() => { bar.style.width = target; }, 80);
+    });
+  }
+
+
+  // ==========================================
+  // 9. CONTACT FORM
+  // ==========================================
+  const contactForm = document.getElementById('contactForm');
+  const formSubmit = document.getElementById('formSubmit');
+  const submitTxt = document.getElementById('submitTxt');
+  const submitIcon = document.getElementById('submitIcon');
+
+  contactForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    formSubmit.disabled = true;
+    submitTxt.textContent = 'Sending...';
+    submitIcon.className = 'fas fa-spinner fa-spin';
+
+    try {
+      const data = new FormData(contactForm);
+      const res = await fetch('https://api.web3forms.com/submit', { method:'POST', body:data });
+      const json = await res.json();
+
+      if (res.ok && json.success) {
+        showToast('Message sent successfully! I\'ll reply soon.', 'success');
+        contactForm.reset();
+      } else {
+        showToast(json.message || 'Something went wrong. Please try again.', 'error');
+      }
+    } catch {
+      showToast('Network error. Please check your connection.', 'error');
+    } finally {
+      formSubmit.disabled = false;
+      submitTxt.textContent = 'Send Message';
+      submitIcon.className = 'fas fa-paper-plane';
     }
+  });
 
-    // Skills Category Switching
-    const skillCategories = document.querySelectorAll('.skill-category');
-    const skillsGrids = document.querySelectorAll('.skills-grid');
-    
-    skillCategories.forEach(category => {
-        category.addEventListener('click', () => {
-            const categoryId = category.getAttribute('data-category');
-            
-            // Update active category
-            skillCategories.forEach(cat => cat.classList.remove('active'));
-            category.classList.add('active');
-            
-            // Show corresponding skills
-            skillsGrids.forEach(grid => {
-                grid.classList.remove('active');
-                if (grid.id === categoryId) {
-                    grid.classList.add('active');
-                }
-            });
-        });
-    });
 
-    // Project Filtering
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-    
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const filter = btn.getAttribute('data-filter');
-            
-            // Update active filter button
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            // Filter projects
-            projectCards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 100);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 300);
-                }
-            });
-        });
-    });
-
-    // Form Submission with Validation
-    const contactForm = document.getElementById("contactForm");
-
-    contactForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        // Basic validation
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const subject = document.getElementById("subject").value;
-        const message = document.getElementById("message").value;
-
-        if (!name || !email || !subject || !message) {
-            showNotification('Please fill in all fields', 'error');
-            return;
-        }
-
-        if (!isValidEmail(email)) {
-            showNotification('Please enter a valid email address', 'error');
-            return;
-        }
-
-        const formData = {
-            access_key: "d3b06feb-bd1e-4713-9292-80433af75420",
-            name: name,
-            email: email,
-            subject: subject,
-            message: message,
-        };
-
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalBtnText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<span>Sending...</span><i class="fas fa-spinner fa-spin"></i>';
-        submitBtn.disabled = true;
-
-        try {
-            const res = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
-
-            if (res.ok) {
-                showNotification('Thank you for your message! It has been sent successfully.', 'success');
-                contactForm.reset();
-            } else {
-                const data = await res.json();
-                showNotification(data.errors?.[0]?.message || 'Failed to send message.', 'error');
-            }
-        } catch (err) {
-            console.error(err);
-            showNotification('Server error occurred while sending message.', 'error');
-        } finally {
-            submitBtn.innerHTML = originalBtnText;
-            submitBtn.disabled = false;
-        }
-    });
-
-    function isValidEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-
-    function showNotification(message, type) {
-        const notification = document.createElement('div');
-        notification.className = `notification ${type}`;
-        notification.innerHTML = `
-            <div class="notification-content">
-                <i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle"></i>
-                <span>${message}</span>
-            </div>
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.classList.add('show');
-        }, 100);
-        
-        setTimeout(() => {
-            notification.classList.remove('show');
-            setTimeout(() => {
-                document.body.removeChild(notification);
-            }, 300);
-        }, 4000);
-    }
-
-    // Add notification styles
-    const notificationStyles = document.createElement('style');
-    notificationStyles.textContent = `
-        .notification {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: var(--color-surface-elevated);
-            border: 1px solid var(--color-border);
-            border-radius: var(--border-radius);
-            padding: 1rem 1.5rem;
-            box-shadow: var(--shadow-xl);
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            z-index: 10000;
-            max-width: 400px;
-        }
-        
-        .notification.show {
-            transform: translateX(0);
-        }
-        
-        .notification.success {
-            border-left: 4px solid var(--color-success);
-        }
-        
-        .notification.error {
-            border-left: 4px solid var(--color-error);
-        }
-        
-        .notification-content {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .notification.success i {
-            color: var(--color-success);
-        }
-        
-        .notification.error i {
-            color: var(--color-error);
-        }
+  // ==========================================
+  // 10. TOAST NOTIFICATIONS
+  // ==========================================
+  function showToast(message, type = 'success') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+      <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+      <span>${message}</span>
     `;
-    document.head.appendChild(notificationStyles);
-
-    // Image lazy loading
-    const images = document.querySelectorAll('img');
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.getAttribute('data-src');
-                img.classList.remove('lazy');
-                imageObserver.unobserve(img);
-            }
-        });
+    container.appendChild(toast);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => toast.classList.add('show'));
     });
-
-    images.forEach(img => {
-        if (img.classList.contains('lazy')) {
-            imageObserver.observe(img);
-        }
-    });
-
-    // Add some performance optimizations
-    window.addEventListener('load', () => {
-        // Remove preloader
-        preloader.classList.add('loaded');
-        
-        // Initialize animations after load
-        setTimeout(() => {
-            animateSkills();
-        }, 500);
-    });
-
-    // Add resize handler for responsive adjustments
-    window.addEventListener('resize', () => {
-        // Recalculate any responsive elements if needed
-    });
-});
-// Enhanced Project Filtering and Load More
-function initializeProjects() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-    const loadMoreBtn = document.getElementById('loadMoreProjects');
-    let visibleProjects = 6; // Initial visible projects
-    const projectsPerLoad = 3;
-
-    // Filter functionality
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const filter = btn.getAttribute('data-filter');
-            
-            // Update active filter button
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            // Filter projects with animation
-            projectCards.forEach((card, index) => {
-                const categories = card.getAttribute('data-category').split(' ');
-                const shouldShow = filter === 'all' || categories.includes(filter);
-                
-                if (shouldShow && index < visibleProjects) {
-                    card.style.display = 'block';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, index * 100);
-                } else {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(20px)';
-                    setTimeout(() => {
-                        card.style.display = 'none';
-                    }, 300);
-                }
-            });
-
-            // Reset visible projects count when filtering
-            visibleProjects = 6;
-            updateLoadMoreButton();
-        });
-    });
-
-    // Load More functionality
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', () => {
-            visibleProjects += projectsPerLoad;
-            showProjects();
-            updateLoadMoreButton();
-        });
-    }
-
-    function showProjects() {
-        const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
-        
-        projectCards.forEach((card, index) => {
-            const categories = card.getAttribute('data-category').split(' ');
-            const shouldShow = activeFilter === 'all' || categories.includes(activeFilter);
-            
-            if (shouldShow && index < visibleProjects) {
-                card.style.display = 'block';
-                setTimeout(() => {
-                    card.classList.add('new');
-                    setTimeout(() => {
-                        card.classList.remove('new');
-                    }, 600);
-                }, index * 100);
-            } else if (shouldShow && index >= visibleProjects) {
-                card.style.display = 'none';
-            }
-        });
-    }
-
-    function updateLoadMoreButton() {
-        const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
-        const totalFilteredProjects = Array.from(projectCards).filter(card => {
-            const categories = card.getAttribute('data-category').split(' ');
-            return activeFilter === 'all' || categories.includes(activeFilter);
-        }).length;
-
-        if (visibleProjects >= totalFilteredProjects) {
-            loadMoreBtn.style.display = 'none';
-        } else {
-            loadMoreBtn.style.display = 'inline-flex';
-        }
-    }
-
-    // Initialize
-    showProjects();
-    updateLoadMoreButton();
-}
-
-// Initialize projects when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeProjects);
-
-// Enhanced Skills Functionality
-function initializeSkills() {
-    const skillCategories = document.querySelectorAll('.skill-category');
-    const skillsGrids = document.querySelectorAll('.skills-grid');
-    const skillProgresses = document.querySelectorAll('.skill-progress');
-
-    // Category switching
-    skillCategories.forEach(category => {
-        category.addEventListener('click', () => {
-            const categoryId = category.getAttribute('data-category');
-            
-            // Update active category
-            skillCategories.forEach(cat => cat.classList.remove('active'));
-            category.classList.add('active');
-            
-            // Show corresponding skills
-            skillsGrids.forEach(grid => {
-                grid.classList.remove('active');
-                if (grid.id === categoryId) {
-                    grid.classList.add('active');
-                    // Animate skill bars when category becomes active
-                    setTimeout(() => animateSkillBars(grid), 300);
-                }
-            });
-        });
-    });
-
-    // Animate skill bars
-    function animateSkillBars(container) {
-        const progressBars = container.querySelectorAll('.skill-progress');
-        progressBars.forEach(bar => {
-            const width = bar.getAttribute('data-width');
-            bar.style.width = '0';
-            setTimeout(() => {
-                bar.style.width = width + '%';
-            }, 100);
-        });
-    }
-
-    // Intersection Observer for initial animation
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const activeGrid = document.querySelector('.skills-grid.active');
-                if (activeGrid) {
-                    animateSkillBars(activeGrid);
-                }
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.3 });
-
-    observer.observe(document.querySelector('.skills'));
-
-    // Initialize first category animation
     setTimeout(() => {
-        const activeGrid = document.querySelector('.skills-grid.active');
-        if (activeGrid) {
-            animateSkillBars(activeGrid);
-        }
-    }, 1000);
-}
+      toast.classList.remove('show');
+      setTimeout(() => toast.remove(), 400);
+    }, 4500);
+  }
 
-// Initialize skills when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeSkills);
 
-// End of script
+  // ==========================================
+  // 11. SMOOTH SCROLL FOR ANCHOR LINKS
+  // ==========================================
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+
+  // ==========================================
+  // 12. FLOATING CARD PARALLAX ON MOUSE
+  // ==========================================
+  const heroSection = document.getElementById('home');
+  const floatCards = document.querySelectorAll('.float-card');
+
+  heroSection?.addEventListener('mousemove', (e) => {
+    const rect = heroSection.getBoundingClientRect();
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const mx = (e.clientX - rect.left - cx) / cx;
+    const my = (e.clientY - rect.top - cy) / cy;
+
+    floatCards.forEach((card, i) => {
+      const depth = (i % 3 + 1) * 4;
+      const tx = mx * depth;
+      const ty = my * depth;
+      card.style.transform = `translate(${tx}px, ${ty}px)`;
+    });
+  });
+
+  heroSection?.addEventListener('mouseleave', () => {
+    floatCards.forEach(card => {
+      card.style.transform = '';
+    });
+  });
+
+
+  // ==========================================
+  // 13. SCROLL HINT FADE
+  // ==========================================
+  const scrollHint = document.getElementById('scrollHint');
+  window.addEventListener('scroll', () => {
+    if (scrollHint) {
+      scrollHint.style.opacity = window.scrollY > 100 ? '0' : '1';
+    }
+  }, { passive: true });
+
+
+  // ==========================================
+  // 14. PROJECT CARD TILT
+  // ==========================================
+  document.querySelectorAll('.proj-card, .project-featured').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `translateY(-8px) rotateY(${x * 6}deg) rotateX(${-y * 4}deg)`;
+      card.style.perspective = '1000px';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+});
