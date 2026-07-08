@@ -106,14 +106,14 @@ document.addEventListener('DOMContentLoaded', () => {
   hamburger?.addEventListener('click', () => {
     hamburger.classList.toggle('open');
     mobileMenu.classList.toggle('open');
-    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    document.body.classList.toggle('menu-open', mobileMenu.classList.contains('open'));
   });
 
   mobLinks.forEach(link => {
     link.addEventListener('click', () => {
       hamburger.classList.remove('open');
       mobileMenu.classList.remove('open');
-      document.body.style.overflow = '';
+      document.body.classList.remove('menu-open');
     });
   });
 
@@ -251,6 +251,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
       const data = new FormData(contactForm);
+      
+      // Dynamic Subject Line Builder
+      const nameVal = data.get('name') || '';
+      const subjectVal = data.get('msg_subject') || '';
+      data.set('subject', `New message from ${nameVal} - ${subjectVal}`);
+
       const res = await fetch('https://api.web3forms.com/submit', { method:'POST', body:data });
       const json = await res.json();
 

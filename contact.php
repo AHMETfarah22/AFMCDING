@@ -35,14 +35,21 @@ $mail = new PHPMailer(true);
 
 try {
     // Sunucu ayarları
+    if (file_exists('config.php')) {
+        require_once 'config.php';
+    } else {
+        define('SMTP_USER', 'your-email@gmail.com');
+        define('SMTP_PASS', 'your-app-password');
+    }
+
     // $mail->SMTPDebug = 2; // Hata ayıklama modunu açmak isterseniz yorumu kardırın (canlıda 0 kalmalıdır)
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';  // Gmail SMTP sunucusu
     $mail->SMTPAuth   = true;
     
     // ====== BURAYI DEĞİŞTİRİN ======
-    $mail->Username   = 'dedeyare4455@gmail.com'; // Kendi Gmail adresiniz
-    $mail->Password   = 'tcfumjuepbhoysrc'; // Gmail'den aldığınız 16 haneli App Password (Uygulama Şifresi)
+    $mail->Username   = SMTP_USER; // Kendi Gmail adresiniz (config.php'den yüklenir)
+    $mail->Password   = SMTP_PASS; // Gmail Uygulama Şifreniz (config.php'den yüklenir)
     // ===============================
     
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
@@ -51,8 +58,8 @@ try {
     // Alıcı ve Gönderici
     // Sitenizden mesaj size geleceği için hem gönderen hem alıcı sizin adresiniz olabilir.
     // Ancak müşteriye geri dönmek (Reply) için müşterinin adresini Reply-To yapıyoruz.
-    $mail->setFrom('dedeyare4455@gmail.com', 'AFM-CODING Web Sitesi');
-    $mail->addAddress('dedeyare4455@gmail.com');     // Mesaj size gelecek
+    $mail->setFrom(SMTP_USER, 'AFM-CODING Web Sitesi');
+    $mail->addAddress(SMTP_USER);     // Mesaj size gelecek
     $mail->addReplyTo($email, $name);                // Yanıtla dediğinizde müşteriye gidecek
 
     // İçerik (E-posta Tasarımı)

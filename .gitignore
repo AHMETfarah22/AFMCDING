@@ -1,0 +1,8 @@
+# Git Ignore configuration
+config.php
+.env
+vendor/
+.gemini/
+.env.local
+.env.*.local
+*.log

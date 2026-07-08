@@ -230,7 +230,7 @@
                 <!-- Left: Info -->
                 <div class="about-info" data-aos="fade-right">
                     <div class="about-img-wrap">
-                        <img src="image/afm1.jpeg" alt="Ahmed Farah Mohamed" class="about-photo">
+                        <img src="image/afm1.jpeg" alt="Ahmed Farah Mohamed" class="about-photo" loading="lazy">
                         <div class="about-img-decor"></div>
                         <div class="exp-badge">
                             <span class="exp-num">3+</span>
@@ -333,7 +333,7 @@
             <!-- Project 1: Focus Time — FEATURED (large) -->
             <div class="project-featured" data-aos="fade-up">
                 <div class="pf-image">
-                    <img src="image/focus_time.png" alt="Focus Time — AI-Powered Study App" class="pf-img" id="imgFocusTime">
+                    <img src="image/focus_time.png" alt="Focus Time — AI-Powered Study App" class="pf-img" id="imgFocusTime" loading="lazy">
                     <div class="pf-img-glow"></div>
                     <div class="pf-badge">
                         <i class="fas fa-star"></i> Featured
@@ -374,7 +374,7 @@
                 <!-- PMS -->
                 <article class="proj-card" id="cardPms">
                     <div class="pc-image-wrap">
-                        <img src="image/pms_dashboard.png" alt="Property Management System Dashboard" class="pc-img" id="imgPms">
+                        <img src="image/pms_dashboard.png" alt="Property Management System Dashboard" class="pc-img" id="imgPms" loading="lazy">
                         <div class="pc-overlay">
                             <div class="pc-overlay-links">
                                 <a href="https://github.com/AHMETfarah22" target="_blank" class="pco-link" id="linkPmsGithub" aria-label="GitHub">
@@ -404,7 +404,7 @@
                 <!-- Hotel Management -->
                 <article class="proj-card" id="cardHotel">
                     <div class="pc-image-wrap">
-                        <img src="image/hotel_system.png" alt="Hotel Management System — Otel 360" class="pc-img" id="imgHotel">
+                        <img src="image/hotel_system.png" alt="Hotel Management System — Otel 360" class="pc-img" id="imgHotel" loading="lazy">
                         <div class="pc-overlay">
                             <div class="pc-overlay-links">
                                 <a href="https://github.com/AHMETfarah22" target="_blank" class="pco-link" id="linkHotelGithub" aria-label="GitHub">
@@ -493,6 +493,7 @@
                 <div class="contact-form-wrap" data-aos="fade-left">
                     <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
                         <input type="hidden" name="access_key" value="d3b06feb-bd1e-4713-9292-80433af75420">
+                        <input type="hidden" name="from_name" value="AFM-CODING Portfolio">
                         <input type="hidden" name="subject" value="New Portfolio Contact">
                         <input type="checkbox" name="botcheck" style="display:none">
 
@@ -509,7 +510,7 @@
 
                         <div class="form-field">
                             <label for="fsubject">Subject</label>
-                            <input type="text" id="fsubject" name="subject" placeholder="What's this about?" required>
+                            <input type="text" id="fsubject" name="msg_subject" placeholder="What's this about?" required>
                         </div>
 
                         <div class="form-field">

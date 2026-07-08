@@ -77,9 +77,12 @@ body {
   overflow-x: hidden;
   transition: background-color .4s, color .4s;
 }
+body.menu-open {
+  overflow: hidden;
+}
 h1,h2,h3,h4,h5 { font-family:var(--ff-head); font-weight:700; color:var(--txt); }
 a { color:inherit; text-decoration:none; transition:var(--ease); }
-img { display:block; max-width:100%; }
+img { display:block; max-width:100%; height:auto; }
 ul { list-style:none; }
 button { cursor:pointer; border:none; background:none; font-family:var(--ff-body); }
 input,textarea,select { font-family:var(--ff-body); }
@@ -895,8 +898,8 @@ section { padding:100px 0; }
 @media (max-width:1100px) {
   .hero-container { grid-template-columns:1fr 1fr; gap:40px; }
   .about-layout { grid-template-columns:1fr; }
-  .about-img-wrap { max-width:340px; }
-  .about-photo { aspect-ratio:3/2; }
+  .about-img-wrap { max-width:340px; margin: 0 auto 24px; }
+  .about-photo { aspect-ratio:1/1; }
   .project-featured { grid-template-columns:1fr; }
   .contact-layout { grid-template-columns:1fr; }
   .footer-top { grid-template-columns:1fr 1fr; }
@@ -904,28 +907,180 @@ section { padding:100px 0; }
 }
 
 @media (max-width:768px) {
+  /* Prevent horizontal scroll / page jiggling */
+  html, body {
+    overflow-x: hidden;
+  }
+
+  /* Nav menu padding alignment */
+  .nav-inner {
+    padding: 14px 20px;
+  }
+  .nav.scrolled .nav-inner {
+    padding: 10px 20px;
+  }
+
+  /* Mobile menu links padding */
+  .mobile-menu {
+    padding: 20px 20px 28px;
+  }
+
   .nav-links, .nav-cv-btn { display:none; }
   .hamburger { display:flex; }
-  .hero-container { grid-template-columns:1fr; text-align:center; }
-  .hero-right { display:none; }
+  
+  /* Touch target optimizations */
+  .social-pill, button, .nav-link, .mob-link, .mob-cv, .pco-link {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Prevent accidental text selections on clickable components */
+  .social-pill, button, .nav-link, .mob-link, .mob-cv {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* iPhone Input Zoom Prevention (font size must be >= 16px) */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+
+  /* Section Padding reduction */
+  section {
+    padding: 70px 0;
+  }
+
+  /* Hero adjustments */
+  .hero {
+    padding: 100px 0 60px;
+  }
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 30px;
+  }
+  
+  /* Hero text content alignment */
+  .hero-role {
+    justify-content: center;
+  }
   .hero-cta, .hero-socials { justify-content:center; }
+  
+  /* Social buttons size optimization for thumbs */
+  .social-pill {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  /* Hero Right (Profile photo layout) - visible and centered above text */
+  .hero-right {
+    display: flex;
+    justify-content: center;
+    order: -1; /* Display profile photo at the top */
+  }
+  .hero-visual {
+    height: auto;
+    padding: 10px 0;
+  }
+  .profile-ring {
+    width: 200px;
+    height: 200px;
+  }
+  .profile-photo {
+    width: 200px;
+    height: 200px;
+    border-width: 3px;
+  }
+  .ring-orbit {
+    inset: -15px;
+  }
+  .orbit-2 {
+    inset: -32px;
+  }
+  /* Hide absolute cards to avoid horizontal page stretching */
+  .float-card {
+    display: none;
+  }
+
+  /* Typography size scaling for headers */
+  .hero-name {
+    font-size: 2.4rem;
+    letter-spacing: -2px;
+  }
+  .section-title {
+    font-size: 1.7rem;
+  }
+  .pf-title {
+    font-size: 1.6rem;
+  }
+
+  /* About section alignment */
+  .about-img-wrap {
+    max-width: 280px;
+    margin: 0 auto 24px;
+  }
+  .about-quick {
+    align-items: center;
+    text-align: center;
+  }
+  .about-stats {
+    gap: 20px;
+  }
+
+  /* Featured Project spacing and grid */
+  .project-featured {
+    padding: 24px;
+    gap: 24px;
+  }
+  .pf-features {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+  }
+  
+  /* Project grid and overlay behavior */
   .projects-grid { grid-template-columns:1fr; }
+  .pc-overlay {
+    opacity: 1;
+    background: linear-gradient(to bottom, transparent, rgba(6, 9, 15, 0.9));
+  }
+  .pc-content {
+    padding: 20px 20px 24px;
+  }
+
+  /* Form & layout grids */
   .form-row { grid-template-columns:1fr; }
+  .contact-form-wrap { padding:28px 22px; }
   .footer-top { grid-template-columns:1fr; }
   .footer-bottom { flex-direction:column; text-align:center; }
-  .about-stats { gap:20px; }
-  .section-container, .footer-container { padding:0 20px; }
-  .contact-form-wrap { padding:28px 22px; }
-  .hero-name { letter-spacing:-2px; }
-  .profile-ring { width:220px; height:220px; }
-  .profile-photo { width:220px; height:220px; }
+
+  /* Relocate Toast to Top Center to avoid collision with FAB-Call */
+  .toast-container {
+    top: 20px;
+    bottom: auto;
+    left: 20px;
+    right: 20px;
+    align-items: center;
+  }
+  .toast {
+    min-width: 0;
+    width: 100%;
+    max-width: 400px;
+    transform: translateY(-120%);
+  }
+  .toast.show {
+    transform: translateY(0);
+  }
 }
 
 @media (max-width:480px) {
   .hero-cta { flex-direction:column; }
   .cta-primary, .cta-secondary { width:100%; justify-content:center; }
   .hero-socials { flex-wrap:wrap; justify-content:center; }
-  .section-title { font-size:1.9rem; }
+  .section-title { font-size:1.6rem; }
   .about-stats { flex-direction:column; align-items:center; }
   .astat-divider { width:60px; height:1px; }
+  
+  .hero-name {
+    font-size: 2.0rem;
+  }
 }
