@@ -1,205 +1,191 @@
 /* ================================================
-   AFM-CODING PREMIUM PORTFOLIO — SCRIPT v3.0
+   AFM-CODING PORTFOLIO — script.js v5.0
+   Clean • Mobile-First • No Dead Code
    ================================================ */
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ==========================================
-  // 1. PRELOADER
-  // ==========================================
-  const preloader = document.getElementById('preloader');
+  /* --------------------------------------------------
+     1. PRELOADER
+  -------------------------------------------------- */
+  const preloader     = document.getElementById('preloader');
   const preloaderFill = document.getElementById('preloaderFill');
-  const preloaderPct = document.getElementById('preloaderPct');
+  const preloaderPct  = document.getElementById('preloaderPct');
   let pct = 0;
 
   const pctInterval = setInterval(() => {
-    pct += Math.random() * 15;
+    pct += Math.random() * 25 + 10;
     if (pct > 90) pct = 90;
-    preloaderFill.style.width = pct + '%';
-    preloaderPct.textContent = Math.floor(pct) + '%';
-  }, 120);
+    if (preloaderFill) preloaderFill.style.width = pct + '%';
+    if (preloaderPct)  preloaderPct.textContent   = Math.floor(pct) + '%';
+  }, 60);
 
-  window.addEventListener('load', () => {
+  const hidePreloader = () => {
     clearInterval(pctInterval);
-    preloaderFill.style.width = '100%';
-    preloaderPct.textContent = '100%';
+    if (preloaderFill) preloaderFill.style.width = '100%';
+    if (preloaderPct)  preloaderPct.textContent   = '100%';
     setTimeout(() => {
-      preloader.classList.add('done');
+      preloader?.classList.add('done');
       initAOS();
       animateSkillBars('frontend');
-    }, 600);
-  });
+    }, 250);
+  };
 
-  // Fallback
-  setTimeout(() => {
-    if (!preloader.classList.contains('done')) {
-      clearInterval(pctInterval);
-      preloaderFill.style.width = '100%';
-      preloaderPct.textContent = '100%';
-      preloader.classList.add('done');
-      initAOS();
-      animateSkillBars('frontend');
-    }
-  }, 3500);
+  window.addEventListener('load', hidePreloader);
+  setTimeout(hidePreloader, 1500); // max wait
 
 
-  // ==========================================
-  // 2. CUSTOM CURSOR
-  // ==========================================
-  const cursorDot = document.getElementById('cursorDot');
-  const cursorRing = document.getElementById('cursorRing');
-  let mouseX = 0, mouseY = 0;
-  let ringX = 0, ringY = 0;
+  /* --------------------------------------------------
+     2. CUSTOM CURSOR (desktop only)
+  -------------------------------------------------- */
+  if (window.matchMedia('(hover: hover) and (min-width: 769px)').matches) {
+    const cursorDot  = document.getElementById('cursorDot');
+    const cursorRing = document.getElementById('cursorRing');
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
 
-  if (window.matchMedia('(hover: hover)').matches) {
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      cursorDot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
+      if (cursorDot) cursorDot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
     });
 
     const animateCursor = () => {
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
-      cursorRing.style.transform = `translate(calc(${ringX}px - 50%), calc(${ringY}px - 50%))`;
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+      if (cursorRing) cursorRing.style.transform = `translate(calc(${ringX}px - 50%), calc(${ringY}px - 50%))`;
       requestAnimationFrame(animateCursor);
     };
     animateCursor();
 
-    document.querySelectorAll('a, button, .proj-card, .project-featured, .ci-card').forEach(el => {
-      el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+    document.querySelectorAll('a, button, .proj-card, .project-featured').forEach(el => {
+      el.addEventListener('mouseenter', () => cursorRing?.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursorRing?.classList.remove('hover'));
     });
   }
 
 
-  // ==========================================
-  // 3. THEME TOGGLE
-  // ==========================================
+  /* --------------------------------------------------
+     3. THEME TOGGLE
+  -------------------------------------------------- */
   const themeToggle = document.getElementById('themeToggle');
-  const themeIcon = document.getElementById('themeIcon');
-  const savedTheme = localStorage.getItem('afm-theme') || 'dark';
-  applyTheme(savedTheme);
+  const themeIcon   = document.getElementById('themeIcon');
+  applyTheme(localStorage.getItem('afm-theme') || 'dark');
 
   themeToggle?.addEventListener('click', () => {
-    const cur = document.body.getAttribute('data-theme');
-    applyTheme(cur === 'dark' ? 'light' : 'dark');
+    const cur = document.documentElement.getAttribute('data-theme') || 'light';
+    applyTheme(cur === 'light' ? 'dark' : 'light');
   });
 
   function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
     document.body.setAttribute('data-theme', theme);
     localStorage.setItem('afm-theme', theme);
-    if (themeIcon) {
-      themeIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-    }
+    if (themeIcon) themeIcon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
   }
 
 
-  // ==========================================
-  // 4. MOBILE MENU
-  // ==========================================
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const mobLinks = document.querySelectorAll('.mob-link, .mob-cv');
+  /* --------------------------------------------------
+     4. MOBILE MENU
+  -------------------------------------------------- */
+  const hamburger     = document.getElementById('hamburger');
+  const mobileMenu    = document.getElementById('mobileMenu');
+  const mobHasDropdown = document.querySelector('.mob-has-dropdown');
+  const mobProjectsBtn = document.getElementById('mobProjects');
+
+  const closeMobileMenu = () => {
+    hamburger?.classList.remove('open');
+    mobileMenu?.classList.remove('open');
+    document.body.classList.remove('menu-open');
+  };
 
   hamburger?.addEventListener('click', () => {
     hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
-    document.body.classList.toggle('menu-open', mobileMenu.classList.contains('open'));
+    mobileMenu?.classList.toggle('open');
+    document.body.classList.toggle('menu-open', mobileMenu?.classList.contains('open'));
   });
 
-  mobLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-      document.body.classList.remove('menu-open');
-    });
+  // Projects sub-dropdown toggle
+  mobProjectsBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    mobHasDropdown?.classList.toggle('open');
+  });
+
+  // Close menu when any link is clicked
+  document.querySelectorAll('.mob-link:not(#mobProjects), .mob-sublink, .mob-cv').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (mobileMenu?.classList.contains('open') &&
+        !mobileMenu.contains(e.target) &&
+        !hamburger.contains(e.target)) {
+      closeMobileMenu();
+    }
   });
 
 
-  // ==========================================
-  // 5. NAVBAR SCROLL + ACTIVE LINK
-  // ==========================================
-  const mainNav = document.getElementById('mainNav');
-  const navLinkEls = document.querySelectorAll('.nav-link');
-  const sections = document.querySelectorAll('section[id]');
+  /* --------------------------------------------------
+     5. NAVBAR SCROLL + ACTIVE LINK TRACKING
+  -------------------------------------------------- */
+  const mainNav     = document.getElementById('mainNav');
+  const navLinkEls  = document.querySelectorAll('.nav-link, .mob-link, .mob-sublink');
+  const sections    = document.querySelectorAll('section[id]');
 
   window.addEventListener('scroll', () => {
-    // Scrolled class
-    mainNav.classList.toggle('scrolled', window.scrollY > 50);
+    mainNav?.classList.toggle('scrolled', window.scrollY > 40);
 
-    // Active nav link
     let current = '';
     sections.forEach(sec => {
-      const top = sec.offsetTop - 140;
-      if (window.scrollY >= top) current = sec.getAttribute('id');
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.getAttribute('id');
     });
+
     navLinkEls.forEach(link => {
       link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
     });
   }, { passive: true });
 
 
-  // ==========================================
-  // 6. AOS — SIMPLE INTERSECTION OBSERVER
-  // ==========================================
+  /* --------------------------------------------------
+     6. AOS — SCROLL ANIMATIONS (Intersection Observer)
+  -------------------------------------------------- */
   function initAOS() {
-    const aosEls = document.querySelectorAll('[data-aos]');
+    const isMobile = window.innerWidth <= 768;
+
+    // On mobile, project cards are always visible — no animation needed
+    if (isMobile) {
+      document.querySelectorAll('.projects-grid [data-aos], .project-featured[data-aos]').forEach(el => {
+        el.classList.add('aos-animate');
+      });
+    }
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const delay = entry.target.dataset.aosDelay || 0;
-          setTimeout(() => entry.target.classList.add('aos-animate'), parseInt(delay));
+          const delay = parseInt(entry.target.dataset.aosDelay || 0);
+          setTimeout(() => entry.target.classList.add('aos-animate'), delay);
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, {
+      threshold: 0.05,   // trigger earlier — just 5% in view
+      rootMargin: '0px 0px -40px 0px'
+    });
 
-    aosEls.forEach(el => observer.observe(el));
+    document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
   }
 
 
-  // ==========================================
-  // 7. ANIMATED COUNTERS
-  // ==========================================
-  const statNums = document.querySelectorAll('.astat-num');
-  let countersRun = false;
-
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !countersRun) {
-        countersRun = true;
-        statNums.forEach(el => {
-          const target = parseInt(el.dataset.count);
-          let count = 0;
-          const step = Math.max(1, Math.floor(target / 40));
-          const timer = setInterval(() => {
-            count = Math.min(count + step, target);
-            el.textContent = count;
-            if (count >= target) clearInterval(timer);
-          }, 40);
-        });
-      }
-    });
-  }, { threshold: 0.3 });
-
-  const aboutStats = document.querySelector('.about-stats');
-  if (aboutStats) counterObserver.observe(aboutStats);
-
-
-  // ==========================================
-  // 8. SKILLS TABS + PROGRESS BARS
-  // ==========================================
-  const stabs = document.querySelectorAll('.stab');
-  const skillPanels = document.querySelectorAll('.skill-panel');
-
-  stabs.forEach(tab => {
+  /* --------------------------------------------------
+     7. SKILLS TABS + BAR ANIMATION
+  -------------------------------------------------- */
+  document.querySelectorAll('.stab').forEach(tab => {
     tab.addEventListener('click', () => {
       const target = tab.dataset.tab;
 
-      stabs.forEach(t => t.classList.remove('active'));
-      skillPanels.forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.skill-panel').forEach(p => p.classList.remove('active'));
 
       tab.classList.add('active');
       const panel = document.getElementById(`panel-${target}`);
@@ -210,58 +196,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Observe skills section to trigger first animation
-  const skillsWrap = document.querySelector('.skills-wrap');
-  let skillsAnimated = false;
-  const skillsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !skillsAnimated) {
-        skillsAnimated = true;
-        animateSkillBars('frontend');
-      }
-    });
-  }, { threshold: 0.2 });
-  if (skillsWrap) skillsObserver.observe(skillsWrap);
-
   function animateSkillBars(tabName) {
     const panel = document.getElementById(`panel-${tabName}`);
     if (!panel) return;
-    const bars = panel.querySelectorAll('.sfill');
-    bars.forEach(bar => {
+    panel.querySelectorAll('.sfill').forEach(bar => {
       bar.style.width = '0%';
-      const target = getComputedStyle(bar).getPropertyValue('--w').trim();
-      setTimeout(() => { bar.style.width = target; }, 80);
+      const target = bar.style.getPropertyValue('--w') || '85%';
+      setTimeout(() => { bar.style.width = target; }, 60);
     });
   }
 
 
-  // ==========================================
-  // 9. CONTACT FORM
-  // ==========================================
+  /* --------------------------------------------------
+     8. CONTACT FORM (Web3Forms)
+  -------------------------------------------------- */
   const contactForm = document.getElementById('contactForm');
-  const formSubmit = document.getElementById('formSubmit');
-  const submitTxt = document.getElementById('submitTxt');
-  const submitIcon = document.getElementById('submitIcon');
+  const formSubmit  = document.getElementById('formSubmit');
+  const submitTxt   = document.getElementById('submitTxt');
+  const submitIcon  = document.getElementById('submitIcon');
 
   contactForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    formSubmit.disabled = true;
-    submitTxt.textContent = 'Sending...';
-    submitIcon.className = 'fas fa-spinner fa-spin';
+    if (formSubmit) formSubmit.disabled = true;
+    if (submitTxt)  submitTxt.textContent = 'Sending...';
+    if (submitIcon) submitIcon.className  = 'fas fa-spinner fa-spin';
 
     try {
       const data = new FormData(contactForm);
-      
-      // Dynamic Subject Line Builder
-      const nameVal = data.get('name') || '';
+      const nameVal    = data.get('name') || '';
       const subjectVal = data.get('msg_subject') || '';
-      data.set('subject', `New message from ${nameVal} - ${subjectVal}`);
+      data.set('subject', `New Message from ${nameVal} - ${subjectVal}`);
 
-      const res = await fetch('https://api.web3forms.com/submit', { method:'POST', body:data });
+      const res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
       const json = await res.json();
 
       if (res.ok && json.success) {
-        showToast('Message sent successfully! I\'ll reply soon.', 'success');
+        showToast('Message sent! I will reply soon.', 'success');
         contactForm.reset();
       } else {
         showToast(json.message || 'Something went wrong. Please try again.', 'error');
@@ -269,101 +239,48 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch {
       showToast('Network error. Please check your connection.', 'error');
     } finally {
-      formSubmit.disabled = false;
-      submitTxt.textContent = 'Send Message';
-      submitIcon.className = 'fas fa-paper-plane';
+      if (formSubmit) formSubmit.disabled = false;
+      if (submitTxt)  submitTxt.textContent = 'Send Message';
+      if (submitIcon) submitIcon.className  = 'fas fa-paper-plane';
     }
   });
 
 
-  // ==========================================
-  // 10. TOAST NOTIFICATIONS
-  // ==========================================
+  /* --------------------------------------------------
+     9. TOAST NOTIFICATIONS
+  -------------------------------------------------- */
   function showToast(message, type = 'success') {
     const container = document.getElementById('toastContainer');
+    if (!container) return;
+
+    const icon  = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-    toast.innerHTML = `
-      <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
-      <span>${message}</span>
-    `;
+    toast.innerHTML = `<i class="fas ${icon}"></i><span>${message}</span>`;
     container.appendChild(toast);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => toast.classList.add('show'));
-    });
+
+    requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('show')));
+
     setTimeout(() => {
       toast.classList.remove('show');
       setTimeout(() => toast.remove(), 400);
-    }, 4500);
+    }, 4000);
   }
 
 
-  // ==========================================
-  // 11. SMOOTH SCROLL FOR ANCHOR LINKS
-  // ==========================================
+  /* --------------------------------------------------
+     10. SMOOTH SCROLL
+  -------------------------------------------------- */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
-      const target = document.querySelector(anchor.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const targetId = anchor.getAttribute('href');
+      if (targetId && targetId !== '#') {
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
-    });
-  });
-
-
-  // ==========================================
-  // 12. FLOATING CARD PARALLAX ON MOUSE
-  // ==========================================
-  const heroSection = document.getElementById('home');
-  const floatCards = document.querySelectorAll('.float-card');
-
-  heroSection?.addEventListener('mousemove', (e) => {
-    const rect = heroSection.getBoundingClientRect();
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const mx = (e.clientX - rect.left - cx) / cx;
-    const my = (e.clientY - rect.top - cy) / cy;
-
-    floatCards.forEach((card, i) => {
-      const depth = (i % 3 + 1) * 4;
-      const tx = mx * depth;
-      const ty = my * depth;
-      card.style.transform = `translate(${tx}px, ${ty}px)`;
-    });
-  });
-
-  heroSection?.addEventListener('mouseleave', () => {
-    floatCards.forEach(card => {
-      card.style.transform = '';
-    });
-  });
-
-
-  // ==========================================
-  // 13. SCROLL HINT FADE
-  // ==========================================
-  const scrollHint = document.getElementById('scrollHint');
-  window.addEventListener('scroll', () => {
-    if (scrollHint) {
-      scrollHint.style.opacity = window.scrollY > 100 ? '0' : '1';
-    }
-  }, { passive: true });
-
-
-  // ==========================================
-  // 14. PROJECT CARD TILT
-  // ==========================================
-  document.querySelectorAll('.proj-card, .project-featured').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      card.style.transform = `translateY(-8px) rotateY(${x * 6}deg) rotateX(${-y * 4}deg)`;
-      card.style.perspective = '1000px';
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
     });
   });
 
