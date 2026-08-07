@@ -37,7 +37,9 @@
     <div class="preloader" id="preloader">
         <div class="preloader-inner">
             <div class="preloader-logo">
-                <img src="image/lgu.jpeg" alt="AFM-CODING Logo" class="preloader-logo-img">
+                <div class="preloader-logo-ring">
+                    <img src="image/lgu.jpeg" alt="AFM-CODING Logo" class="preloader-logo-img">
+                </div>
             </div>
             <div class="preloader-bar">
                 <div class="preloader-fill" id="preloaderFill"></div>
@@ -50,7 +52,9 @@
     <nav class="nav" id="mainNav">
         <div class="nav-inner">
             <a href="#home" class="nav-logo" id="navLogoLink" title="AFM-CODING">
-                <img src="image/lgu.jpeg" alt="AFM-CODING Logo" class="nav-logo-img">
+                <div class="nav-logo-wrap">
+                    <img src="image/lgu.jpeg" alt="AFM-CODING Logo" class="nav-logo-img">
+                </div>
                 <div class="nav-brand-text">
                     <span class="brand-title">AFM<span class="brand-accent">-CODING</span></span>
                     <span class="brand-sub">FULL STACK DEV</span>
@@ -338,6 +342,14 @@
                 <!-- PMS Card -->
                 <article class="proj-card" id="cardPms">
                     <div class="pc-image-wrap">
+                        <div class="mac-bar">
+                            <div class="mac-dots">
+                                <span class="mac-dot mac-red"></span>
+                                <span class="mac-dot mac-yellow"></span>
+                                <span class="mac-dot mac-green"></span>
+                            </div>
+                            <span class="mac-url"><i class="fas fa-lock"></i> pms-analytics.afm-coding.com</span>
+                        </div>
                         <img src="image/pms_dashboard.png" alt="Property Management System Dashboard" class="pc-img" id="imgPms" loading="lazy">
                         <div class="pc-overlay">
                             <div class="pc-overlay-links">
@@ -346,19 +358,26 @@
                         </div>
                     </div>
                     <div class="pc-content">
-                        <span class="pc-cat">Enterprise SaaS · C# · .NET</span>
+                        <div class="pc-head-row">
+                            <span class="pc-cat">Enterprise SaaS · C# · .NET</span>
+                            <span class="pc-badge-tag"><i class="fas fa-shield-halved"></i> Enterprise</span>
+                        </div>
                         <h3 class="pc-title">Property Management System</h3>
                         <p class="pc-desc">
                             A robust management portal for landlords and rental agencies with real-time 
                             occupancy dashboards, financial analytics, guest reservation logs, and automated invoicing.
                         </p>
                         <div class="pc-tech">
-                            <span>C#</span><span>.NET Core</span><span>ASP.NET</span><span>SQL Server</span>
+                            <span><i class="devicon-csharp-plain"></i> C#</span>
+                            <span>.NET Core</span>
+                            <span>ASP.NET</span>
+                            <span>SQL Server</span>
                         </div>
                         <div class="pc-footer">
                             <a href="https://github.com/AHMETfarah22" target="_blank" class="pl-github">
                                 <i class="fab fa-github"></i> View Code
                             </a>
+                            <span class="pc-stat-chip"><i class="fas fa-code-branch"></i> C# · .NET</span>
                         </div>
                     </div>
                 </article>
@@ -366,6 +385,14 @@
                 <!-- Hotel System Card -->
                 <article class="proj-card" id="cardHotel">
                     <div class="pc-image-wrap">
+                        <div class="mac-bar">
+                            <div class="mac-dots">
+                                <span class="mac-dot mac-red"></span>
+                                <span class="mac-dot mac-yellow"></span>
+                                <span class="mac-dot mac-green"></span>
+                            </div>
+                            <span class="mac-url"><i class="fas fa-lock"></i> hotel360.afm-coding.com</span>
+                        </div>
                         <img src="image/hotel_system.png" alt="Hotel Management System — Otel 360" class="pc-img" id="imgHotel" loading="lazy">
                         <div class="pc-overlay">
                             <div class="pc-overlay-links">
@@ -374,19 +401,26 @@
                         </div>
                     </div>
                     <div class="pc-content">
-                        <span class="pc-cat">Management System · C# · .NET</span>
-                        <h3 class="pc-title">Hotel Management <em>(Otel 360)</em></h3>
+                        <div class="pc-head-row">
+                            <span class="pc-cat">Management System · C# · .NET</span>
+                            <span class="pc-badge-tag"><i class="fas fa-hotel"></i> Otel 360</span>
+                        </div>
+                        <h3 class="pc-title">Hotel Management Platform</h3>
                         <p class="pc-desc">
                             Enterprise-grade hotel administration platform featuring an interactive room-status 
                             panel, check-in/out management, guest records, and financial reporting.
                         </p>
                         <div class="pc-tech">
-                            <span>C#</span><span>.NET</span><span>Entity Framework</span><span>MSSQL</span>
+                            <span>C#</span>
+                            <span>.NET</span>
+                            <span>Entity Framework</span>
+                            <span>MSSQL</span>
                         </div>
                         <div class="pc-footer">
                             <a href="https://github.com/AHMETfarah22" target="_blank" class="pl-github">
                                 <i class="fab fa-github"></i> View Code
                             </a>
+                            <span class="pc-stat-chip"><i class="fas fa-hotel"></i> Hotel SaaS</span>
                         </div>
                     </div>
                 </article>
@@ -491,7 +525,9 @@
             <div class="footer-top">
                 <div class="footer-brand">
                     <a href="#home" class="nav-logo" title="AFM-CODING" style="margin-bottom: 12px; display: inline-flex;">
-                        <img src="image/lgu.jpeg" alt="AFM-CODING Logo" class="nav-logo-img">
+                        <div class="nav-logo-wrap">
+                            <img src="image/lgu.jpeg" alt="AFM-CODING Logo" class="nav-logo-img">
+                        </div>
                     </a>
                     <p>Building digital excellence through passionate craftsmanship and clean software engineering.</p>
                 </div>
